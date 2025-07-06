@@ -145,3 +145,6 @@ export const refreshToken = async (req, res) => {
     });
   }
 };
+
+// TODO GET PROFILE
+export const getProfile = async (req, res) => {};
