@@ -1,12 +1,12 @@
 export const setCookies = (res, accessToken, refreshToken) => {
-  res.cookie("access-token", accessToken, {
+  res.cookie("accesstoken", accessToken, {
     httpOnly: true, //prevents XSS attacks
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict", //prevent CSRF attacks
     maxAge: 15 * 60 * 1000,
   });
 
-  res.cookie("refresh-token", refreshToken, {
+  res.cookie("refreshtoken", refreshToken, {
     httpOnly: true, //prevents XSS attacks
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict", //prevent CSRF attacks
