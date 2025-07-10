@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema(
       default: "customer",
     },
   },
-  //createdat , updatedat fields are added
+  //createdate , updatedate fields are added
   {
     timestamps: true,
   }
