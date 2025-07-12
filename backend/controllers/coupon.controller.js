@@ -52,3 +52,47 @@ export const validateCoupon = async (req, res) => {
     });
   }
 };
+
+export const createnewCoupon = async (req, res) => {
+  try {
+    const { couponCode, discountPercentage, expirationDate, minAmount } =
+      req.body;
+    if (
+      !couponCode ||
+      discountPercentage === undefined ||
+      !expirationDate ||
+      minAmount === undefined
+    ) {
+      return res.status(400).json({
+        message: "Some missing fields. Please provide all the fields below",
+        couponCode,
+        discountPercentage,
+        expirationDate,
+        minAmount,
+      });
+    }
+
+    const coupon = await Coupon.create({
+      couponCode,
+      discountPercentage,
+      expirationDate,
+      minAmount: minAmount * 100,
+    });
+
+    res.status(200).json({
+      message: "Coupon created Successfully",
+      coupon,
+    });
+  } catch (error) {
+    console.log("Error in creating coupon", error.message);
+    if (error.code === 11000) {
+      return res.status(400).json({
+        message: "Coupon code already exists",
+      });
+    }
+    res.status(500).json({
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
