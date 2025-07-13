@@ -71,8 +71,7 @@ The frontend includes the following components:
 3.  Start the backend server:
 
     ```bash
-    cd backend
-    npm start
+    npm run dev
     ```
 4.  Start the frontend development server:
 
