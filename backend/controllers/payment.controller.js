@@ -45,6 +45,8 @@ export const createCheckoutSession = async (req, res) => {
         totalAmount -= Math.round(
           (totalAmount * coupon.discountPercentage) / 100
         );
+      } else {
+        coupon = null;
       }
     }
 
@@ -63,7 +65,7 @@ export const createCheckoutSession = async (req, res) => {
         : [],
       metadata: {
         userId: req.user._id.toString(),
-        couponCode: couponCode || "",
+        couponCode: coupon ? couponCode : "",
         products: JSON.stringify(
           products.map((p) => ({
             id: p._id,
@@ -82,7 +84,7 @@ export const createCheckoutSession = async (req, res) => {
     console.log("Error in creating checkout session", error.message);
     res.status(500).json({
       message: "Server error",
-      message: error.message,
+      error: error.message,
     });
   }
 };
